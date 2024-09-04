@@ -32,7 +32,12 @@ public class MapExercises {
         // TODO: Fill in this function.
         Map<String, Integer> map = new HashMap<>();
         for (String key: words) {
-            map.put(key, 1);
+            if (map.containsKey(key)) {
+                map.put(key, map.get(key) + 1);
+            }
+            else {
+                map.put(key, 1);
+            }
         }
         return map;
     }
