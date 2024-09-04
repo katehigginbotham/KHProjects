@@ -1,8 +1,8 @@
-public class DessertJava {
+public class Dessert {
     int flavor;
     int price;
     static int numDesserts = 0;
-    public DessertJava(int newflavor, int newprice) {
+    public Dessert(int newflavor, int newprice) {
         flavor = newflavor;
         price = newprice;
         numDesserts += 1;
