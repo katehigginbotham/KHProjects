@@ -180,26 +180,16 @@ public class Model {
         if (targetY > maxYIndex) {
             return;
         }
-        // Step 1: Move targetY to the correct tile.
-        //  Increment targetY until it's at the highest spot on the board or
-        //  until it points to another tile
         while (targetY < maxYIndex && board.tile(x, targetY) == null) {
             targetY++;
             System.out.print("the new tile is " + board.tile(x, targetY));
         }
-
         Tile tileAbove = board.tile(x, targetY);
-        // Case 1: Top of the board
         if (tileAbove == null) {
             board.move(x, targetY, currTile);
-        }
-        // Case 2: Tile with a different value or that has already been merged
-        else if (tileAbove.value() != myValue || tileAbove.wasMerged()) {
-            // Move it below the tileAbove
+        } else if (tileAbove.value() != myValue || tileAbove.wasMerged()) {
             board.move(x, targetY - 1, currTile);
-        }
-        // Case 3: Tile that can be merged with
-        else if (tileAbove.value() == myValue && !tileAbove.wasMerged()) {
+        } else if (tileAbove.value() == myValue && !tileAbove.wasMerged()) {
             board.move(x, targetY, currTile);
             score += myValue * 2;
         }
