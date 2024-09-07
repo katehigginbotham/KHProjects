@@ -85,7 +85,6 @@ public class Model {
      *  Empty spaces are stored as null.
      * */
     public boolean emptySpaceExists() {
-        // TODO: Task 1. Fill in this function.
         int s = board.size();
         for (int x = 0; x < s; x++) {
             for (int y = 0; y < s; y++) {
@@ -104,7 +103,6 @@ public class Model {
      * given a Tile object t, we get its value with t.value().
      */
     public boolean maxTileExists() {
-        // TODO: Task 2. Fill in this function.
         int s = board.size();
         for (int x = 0; x < s; x++) {
             for (int y = 0; y < s; y++) {
@@ -124,7 +122,6 @@ public class Model {
      * 2. There are two adjacent tiles with the same value.
      */
     public boolean atLeastOneMoveExists() {
-        // TODO: Task 3. Fill in this function.
         int s = board.size();
         for (int x = 0; x < s; x++) {
             for (int y = 0; y < s; y++) {
@@ -174,8 +171,6 @@ public class Model {
         Tile currTile = board.tile(x, y);
         int myValue = currTile.value();
         int targetY = y + 1;
-        // TODO: Tasks 5, 6, and 10. Fill in this function.
-
         int maxYIndex = board.size() - 1;
         if (targetY > maxYIndex) {
             return;
@@ -201,7 +196,6 @@ public class Model {
      * so we are tilting the tiles in this column up.
      * */
     public void tiltColumn(int x) {
-        // TODO: Task 7. Fill in this function.
         int s = board.size();
         for (int y = s - 1; y >= 0; y--) {
             Tile newTile = board.tile(x, y);
@@ -212,7 +206,6 @@ public class Model {
     }
 
     public void tilt(Side side) {
-        // TODO: Tasks 8 and 9. Fill in this function.
         board.setViewingPerspective(side);
         int s = board.size();
         for (int i = 0; i < s; i++) {
