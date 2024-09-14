@@ -52,7 +52,7 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
             return returnList;
         }
         while (curr != sentinel) {
-            returnList.addLast(curr.item);
+            returnList.add(curr.item);
             curr = curr.next;
         }
         return returnList;
