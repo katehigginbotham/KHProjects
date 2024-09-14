@@ -68,8 +68,9 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
     @Override
     public T removeFirst() {
         Node first = sentinel.next;
-        if (isEmpty())
+        if (size == 0) {
             return null;
+        }
         sentinel.next = first.next;
         first.next.prev = sentinel;
         size -= 1;
@@ -79,8 +80,9 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
     @Override
     public T removeLast() {
         Node last = sentinel.prev;
-        if (isEmpty())
+        if (size == 0) {
             return null;
+        }
         sentinel.prev = last.prev;
         last.prev.next = sentinel;
         size -= 1;
