@@ -143,5 +143,6 @@ public class LinkedListDeque61BTest {
         assertThat(lld1.isEmpty()).isEqualTo(false);
         assertThat(lld1.size()).isEqualTo(1);
         assertThat(lld1.removeLast()).isEqualTo(2);
+        assertThat(lld1.isEmpty()).isEqualTo(true);
     }
 }

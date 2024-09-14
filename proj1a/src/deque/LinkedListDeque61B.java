@@ -46,13 +46,13 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
 
     @Override
     public List<T> toList() {
-        List<T> newList = new ArrayList<>();
+        List<T> returnList = new ArrayList<>();
         Node curr = sentinel.next;
         while (curr != sentinel) {
-            newList.addLast(curr.item);
+            returnList.addLast(curr.item);
             curr = curr.next;
         }
-        return newList;
+        return returnList;
     }
 
     @Override
