@@ -50,7 +50,7 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         if (isEmpty()) {
             return returnList;
         }
-        for (Node curr = sentinel.next; curr != sentinel; curr = curr.next) {
+        for (Node curr = sentinel.next; curr != null; curr = curr.next) {
             returnList.add(curr.item);
         }
         return returnList;
