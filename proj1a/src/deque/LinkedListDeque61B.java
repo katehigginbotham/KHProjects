@@ -49,7 +49,7 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         List<T> newList = new ArrayList<>();
         Node curr = sentinel.next;
         if (curr == null) {
-            return null;
+            return newList;
         }
         while (curr != sentinel) {
             newList.add(curr.item);
