@@ -47,7 +47,7 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
     @Override
     public List<T> toList() {
         List<T> returnList = new ArrayList<>();
-        Node curr = sentinel.next;
+        Node curr = sentinel;
         if (curr == null) {
             return returnList;
         }
