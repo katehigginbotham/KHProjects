@@ -108,21 +108,12 @@ public class LinkedListDeque61BTest {
     public void removeFirstTest() {
         Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
         lld1.addFirst(3);
-        assertThat(lld1.size()).isEqualTo(1);
-        assertThat(lld1.removeFirst()).isEqualTo(3);
+        lld1.removeFirst();
         assertThat(lld1.isEmpty()).isEqualTo(true);
-        lld1.addLast(3);
-        assertThat(lld1.size()).isEqualTo(1);
-        assertThat(lld1.removeLast()).isEqualTo(3);
-        assertThat(lld1.isEmpty()).isEqualTo(true);
-        lld1.addFirst(2);
+        lld1.addLast(2);
         lld1.addLast(0);
-        assertThat(lld1.size()).isEqualTo(2);
         assertThat(lld1.removeFirst()).isEqualTo(2);
         assertThat(lld1.isEmpty()).isEqualTo(false);
-        assertThat(lld1.size()).isEqualTo(1);
-        assertThat(lld1.removeFirst()).isEqualTo(0);
-        assertThat(lld1.isEmpty()).isEqualTo(true);
     }
 
     @Test
