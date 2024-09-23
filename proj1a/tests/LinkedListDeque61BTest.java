@@ -65,6 +65,7 @@ public class LinkedListDeque61BTest {
     public void toListTest() {
         Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
         lld1.addFirst(3);
+        assertThat((lld1.toList()).isEmpty()).isEqualTo(false);
         lld1.removeFirst();
         assertThat(lld1.toList().isEmpty()).isEqualTo(true);
     }
