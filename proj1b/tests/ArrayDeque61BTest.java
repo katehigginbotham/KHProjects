@@ -125,13 +125,13 @@ public class ArrayDeque61BTest {
         L.addFirst(3);
         L.removeFirst();
         assertThat(L.isEmpty()).isEqualTo(true);
-        L.addLast(2);
+        L.addFirst(2);
         L.addFirst(3);
         L.addLast(0);
         L.removeFirst();
-        assertThat(L.toList()).containsExactly(2, 0).inOrder();
+        assertThat(L.toList()).containsExactly(3, 2).inOrder();
         assertThat(L.isEmpty()).isEqualTo(false);
-        assertThat(L.removeFirst()).isEqualTo(2);
+        assertThat(L.removeFirst()).isEqualTo(0);
     }
 
     @Test
