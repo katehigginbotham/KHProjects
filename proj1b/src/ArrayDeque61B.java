@@ -1,3 +1,5 @@
+import net.sf.saxon.ma.arrays.ArrayFunctionSet;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,16 +13,16 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         items = (T[]) new Object[8];
         size = 0;
         first = 0;
-        last = size - 1;
+        last = items.length - 1;
     }
 
     private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
         for (int i = 0; i < size; i++) {
-            a[i] = items[Math.floorMod(first + i, size())];
+            a[i] = get(i);
         }
         items = a;
-        first = 0;
+        first = capacity - 1;
         last = size;
     }
 
@@ -59,18 +61,15 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
             returnList.add(get(i));
         }
         return returnList;
-        // return List.of();
     }
 
     @Override
     public boolean isEmpty() {
-//        return false;
         return size == 0;
     }
 
     @Override
     public int size() {
-        // return 0;
         return size;
     }
 
@@ -83,7 +82,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
          T returnItem = get(first);
          items[first] = null;
          size -= 1;
-         first += 1;
+         first -= 1;
         if (size > 0 & size == items.length / 4) {
             resize(items.length / 2);
         }
@@ -92,14 +91,14 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
 
     @Override
     public T removeLast() {
-        // return null;
-        if (items == null) {
+        if (size == 0) {
             return null;
         }
         last = Math.floorMod(last, items.length);
-        T returnItem = items[last];
+        T returnItem = get(last);
         items[last] = null;
         size -= 1;
+        last += 1;
         if (size > 0 & size == items.length / 4) {
             resize(items.length / 2);
         }
@@ -108,8 +107,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
 
     @Override
     public T get(int index) {
-        // returns null;
-        if (index < 0 | index > size) {
+        if (index < 0 | index >= size) {
             return null;
         }
         return items[Math.floorMod(first + index, items.length)];
@@ -119,4 +117,23 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
     public T getRecursive(int index) {
         throw new UnsupportedOperationException("No need to implement getRecursive for proj 1b");
     }
+
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+//        if (obj instanceof ArrayDeque61B otherArrayDeque) {
+//            if (this.size != otherArrayDeque.size) {
+//                return false;
+//            }
+//            for (int i = 0; i < this.size; i++) {
+//                if (this.get(i) != otherArrayDeque.get(i)) {
+//                    return false;
+//                }
+//            }
+//            return true;
+//        }
+//        return false;
+//    }
 }
