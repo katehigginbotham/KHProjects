@@ -56,7 +56,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
     public List<T> toList() {
         List<T> returnList = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            returnList.addLast(get(i));
+            returnList.add(get(i));
         }
         return returnList;
         // return List.of();
@@ -96,8 +96,8 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         if (items == null) {
             return null;
         }
-        last = Math.floorMod(last - 1, items.length);
-        T returnItem = get(last);
+        last = Math.floorMod(last, items.length);
+        T returnItem = items[last];
         items[last] = null;
         size -= 1;
         if (size > 0 & size == items.length / 4) {
