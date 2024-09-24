@@ -32,4 +32,16 @@ public class MaxArrayDeque61BTest {
         m.removeFirst();
         assertThat(m.max()).isEqualTo(null);
     }
+
+    @Test
+    public void compTest() {
+        MaxArrayDeque61B<Integer> m = new MaxArrayDeque61B<Integer>(Comparator.naturalOrder());
+        MaxArrayDeque61B<Integer> r = new MaxArrayDeque61B<Integer>(Comparator.reverseOrder());
+        m.addLast(7);
+        m.addFirst(4);
+        r.addLast(7);
+        r.addFirst(4);
+        assertThat(m.max()).isEqualTo(7);
+        assertThat(r.max()).isEqualTo(4);
+    }
 }
