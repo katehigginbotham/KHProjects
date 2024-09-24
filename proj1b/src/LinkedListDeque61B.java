@@ -1,11 +1,11 @@
-package deque;
-
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class LinkedListDeque61B<T> implements Deque61B<T> {
     private Node sentinel;
     private int size;
+    private int pos;
 
     public LinkedListDeque61B() {
         sentinel = new Node(null, null, null);
@@ -114,5 +114,55 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         }
         sentinel.next = sentinel.next.next;
         return getRecursive(index - 1);
+    }
+    public class LinkedListDequeIterator implements Iterator<T> {
+        public LinkedListDequeIterator() {
+            pos = 0;
+        }
+
+        public boolean hasNext() {
+            return pos < size;
+        }
+
+        public T next() {
+            T returnItem = get(pos);
+            pos += 1;
+            return returnItem;
+        }
+    }
+
+    public Iterator<T> iterator() {
+        return new LinkedListDequeIterator();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof LinkedListDeque61B otherLinkedListDeque) {
+            if (this.size != otherLinkedListDeque.size) {
+                return false;
+            }
+            for (int i = 0; i < this.size; i++) {
+                if (!this.get(i).equals(otherLinkedListDeque.get(i))) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (T item: this) {
+            sb.append(item.toString());
+            sb.append(", ");
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }

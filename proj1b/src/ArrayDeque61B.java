@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ArrayDeque61B<T> implements Deque61B<T> {
@@ -6,6 +7,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
     private int size;
     private int first;
     private int last;
+    private int pos;
 
     public ArrayDeque61B() {
         items = (T[]) new Object[8];
@@ -116,6 +118,26 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         throw new UnsupportedOperationException("No need to implement getRecursive for proj 1b");
     }
 
+    public class ArrayDequeIterator implements Iterator<T> {
+        public ArrayDequeIterator() {
+            pos = 0;
+        }
+
+        public boolean hasNext() {
+            return pos < size;
+        }
+
+        public T next() {
+            T returnItem = get(pos);
+            pos += 1;
+            return returnItem;
+        }
+    }
+
+    public Iterator<T> iterator() {
+        return new ArrayDequeIterator();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -126,12 +148,24 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
                 return false;
             }
             for (int i = 0; i < this.size; i++) {
-                if (this.get(i) != otherArrayDeque.get(i)) {
+                if (!this.get(i).equals(otherArrayDeque.get(i))) {
                     return false;
                 }
             }
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (T item: this) {
+            sb.append(item.toString());
+            sb.append(", ");
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }
