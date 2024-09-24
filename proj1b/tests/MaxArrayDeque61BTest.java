@@ -42,6 +42,6 @@ public class MaxArrayDeque61BTest {
         r.addLast(7);
         r.addFirst(4);
         assertThat(m.max()).isEqualTo(7);
-        assertThat(r.max()).isEqualTo(4);
+        assertThat(r.max(Comparator.reverseOrder())).isEqualTo(4);
     }
 }
