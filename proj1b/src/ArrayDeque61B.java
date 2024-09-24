@@ -74,7 +74,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
     @Override
     public T removeFirst() {
         if (items == null) {
-             return null;
+            return null;
         }
         T returnItem = get(0);
         items[Math.floorMod(first, items.length)] = null;
@@ -84,7 +84,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         if (size > 0 & size == items.length / 4) {
             resize(items.length / 2);
         }
-         return returnItem;
+        return returnItem;
     }
 
     @Override
