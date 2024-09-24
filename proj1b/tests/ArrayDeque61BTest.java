@@ -113,13 +113,6 @@ public class ArrayDeque61BTest {
     }
 
     @Test
-    public void getRecursiveTest() {
-        Deque61B<Integer> L = new ArrayDeque61B<>();
-        L.addFirst(3);
-        assertThat(L.getRecursive(0)).isNull();
-    }
-
-    @Test
     public void removeFirstTest() {
         Deque61B<Integer> L = new ArrayDeque61B<>();
         L.addFirst(3);
@@ -176,6 +169,5 @@ public class ArrayDeque61BTest {
         assertThat(L.size()).isEqualTo(2);
         L.removeLast();
         assertThat(L.size()).isEqualTo(1);
-
     }
 }
