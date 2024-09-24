@@ -170,4 +170,37 @@ public class ArrayDeque61BTest {
         L.removeLast();
         assertThat(L.size()).isEqualTo(1);
     }
+
+    @Test
+    public void testToString() {
+        ArrayDeque61B<Integer> L = new ArrayDeque61B<>();
+        L.addLast(4);
+        L.addLast(6);
+        L.addLast(3);
+        assertThat(L.toString()).isEqualTo("[4, 6, 3]");
+        L.addFirst(0);
+        assertThat(L.toString()).isEqualTo("[0, 4, 6, 3]");
+        L.removeLast();
+        assertThat(L.toString()).isEqualTo("[0, 4, 6]");
+        L.removeFirst();
+        assertThat(L.toString()).isEqualTo("[4, 6]");
+    }
+
+    @Test
+    public void testEquals() {
+        ArrayDeque61B<Integer> l1 = new ArrayDeque61B<>();
+        ArrayDeque61B<Integer> l2 = new ArrayDeque61B<>();
+        l1.addFirst(5);
+        l1.addLast(9);
+        l2.addFirst(5);
+        l2.addLast(9);
+        assertThat(l1.equals(l2)).isEqualTo(true);
+        l2.removeFirst();
+        assertThat(l1.equals(l2)).isEqualTo(false);
+    }
+
+    @Test
+    public void iteratorTest() {
+        ArrayDeque61B<Integer> L = new ArrayDeque61B<>();
+    }
 }

@@ -115,22 +115,31 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         sentinel.next = sentinel.next.next;
         return getRecursive(index - 1);
     }
+
     public class LinkedListDequeIterator implements Iterator<T> {
+        private Node curr;
+
         public LinkedListDequeIterator() {
-            pos = 0;
+            curr = sentinel.next;
         }
 
+        @Override
         public boolean hasNext() {
-            return pos < size;
+            return curr != sentinel;
         }
 
+        @Override
         public T next() {
-            T returnItem = get(pos);
-            pos += 1;
+            if (!hasNext()) {
+                return null;
+            }
+            T returnItem = curr.item;
+            curr = curr.next;
             return returnItem;
         }
     }
 
+    @Override
     public Iterator<T> iterator() {
         return new LinkedListDequeIterator();
     }
@@ -144,8 +153,12 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
             if (this.size != otherLinkedListDeque.size) {
                 return false;
             }
-            for (int i = 0; i < this.size; i++) {
-                if (!this.get(i).equals(otherLinkedListDeque.get(i))) {
+            Iterator<T> currIterator = this.iterator();
+            Iterator<T> otherIterator = otherLinkedListDeque.iterator();
+            while (currIterator.hasNext() && otherIterator.hasNext()) {
+                T thisItem = currIterator.next();
+                Object otherItem = otherIterator.next();
+                if (!thisItem.equals(otherItem)) {
                     return false;
                 }
             }
@@ -158,9 +171,12 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        for (T item: this) {
-            sb.append(item.toString());
-            sb.append(", ");
+        Iterator<T> s = this.iterator();
+        while (s.hasNext()) {
+            sb.append(s.next());
+            if (s.hasNext()) {
+                sb.append(", ");
+            }
         }
         sb.append("]");
         return sb.toString();

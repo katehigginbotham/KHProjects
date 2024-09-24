@@ -7,7 +7,6 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
     private int size;
     private int first;
     private int last;
-    private int pos;
 
     public ArrayDeque61B() {
         items = (T[]) new Object[8];
@@ -119,21 +118,29 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
     }
 
     public class ArrayDequeIterator implements Iterator<T> {
+        private int pos;
+
         public ArrayDequeIterator() {
-            pos = 0;
+            this.pos = 0;
         }
 
+        @Override
         public boolean hasNext() {
             return pos < size;
         }
 
+        @Override
         public T next() {
+            if (!hasNext()) {
+                return null;
+            }
             T returnItem = get(pos);
             pos += 1;
             return returnItem;
         }
     }
 
+    @Override
     public Iterator<T> iterator() {
         return new ArrayDequeIterator();
     }
@@ -147,8 +154,12 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
             if (this.size != otherArrayDeque.size) {
                 return false;
             }
-            for (int i = 0; i < this.size; i++) {
-                if (!this.get(i).equals(otherArrayDeque.get(i))) {
+            Iterator<T> currIterator = this.iterator();
+            Iterator<T> otherIterator = otherArrayDeque.iterator();
+            while (currIterator.hasNext() && otherIterator.hasNext()) {
+                T thisItem = currIterator.next();
+                Object otherItem = otherIterator.next();
+                if (!thisItem.equals(otherItem)) {
                     return false;
                 }
             }
@@ -161,9 +172,11 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        for (T item: this) {
-            sb.append(item.toString());
-            sb.append(", ");
+        for (int i = 0; i < size; i++) {
+            sb.append(get(i));
+            if (i < size - 1) {
+                sb.append(", ");
+            }
         }
         sb.append("]");
         return sb.toString();
