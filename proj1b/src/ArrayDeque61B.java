@@ -1,5 +1,3 @@
-import net.sf.saxon.ma.arrays.ArrayFunctionSet;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
             a[i] = get(i);
         }
         items = a;
-        first = capacity - 1;
+        first = capacity;
         last = size;
     }
 
@@ -75,14 +73,14 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
 
     @Override
     public T removeFirst() {
-         if (items == null) {
+        if (items == null) {
              return null;
-         }
-         first = Math.floorMod(first, items.length);
-         T returnItem = get(first);
-         items[first] = null;
-         size -= 1;
-         first -= 1;
+        }
+        T returnItem = get(0);
+        items[Math.floorMod(first, items.length)] = null;
+        size -= 1;
+        first = Math.floorMod(first, items.length);
+        first += 1;
         if (size > 0 & size == items.length / 4) {
             resize(items.length / 2);
         }
@@ -91,14 +89,14 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
 
     @Override
     public T removeLast() {
-        if (size == 0) {
+        if (items == null) {
             return null;
         }
-        last = Math.floorMod(last, items.length);
-        T returnItem = get(last);
-        items[last] = null;
+        T returnItem = get(size - 1);
+        items[size - 1] = null;
         size -= 1;
-        last += 1;
+        last -= 1;
+        last = Math.floorMod(last, items.length);
         if (size > 0 & size == items.length / 4) {
             resize(items.length / 2);
         }
@@ -107,7 +105,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
 
     @Override
     public T get(int index) {
-        if (index < 0 | index >= size) {
+        if (index < 0 | index >= items.length) {
             return null;
         }
         return items[Math.floorMod(first + index, items.length)];
@@ -118,22 +116,22 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         throw new UnsupportedOperationException("No need to implement getRecursive for proj 1b");
     }
 
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (this == obj) {
-//            return true;
-//        }
-//        if (obj instanceof ArrayDeque61B otherArrayDeque) {
-//            if (this.size != otherArrayDeque.size) {
-//                return false;
-//            }
-//            for (int i = 0; i < this.size; i++) {
-//                if (this.get(i) != otherArrayDeque.get(i)) {
-//                    return false;
-//                }
-//            }
-//            return true;
-//        }
-//        return false;
-//    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof ArrayDeque61B otherArrayDeque) {
+            if (this.size != otherArrayDeque.size) {
+                return false;
+            }
+            for (int i = 0; i < this.size; i++) {
+                if (this.get(i) != otherArrayDeque.get(i)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 }
