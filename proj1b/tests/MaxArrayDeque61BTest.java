@@ -38,10 +38,12 @@ public class MaxArrayDeque61BTest {
         MaxArrayDeque61B<Integer> m = new MaxArrayDeque61B<Integer>(Comparator.naturalOrder());
         MaxArrayDeque61B<Integer> r = new MaxArrayDeque61B<Integer>(Comparator.reverseOrder());
         m.addLast(7);
+        m.addFirst(2);
         m.addFirst(4);
         r.addLast(7);
+        r.addFirst(2);
         r.addFirst(4);
         assertThat(m.max()).isEqualTo(7);
-        assertThat(r.max(Comparator.reverseOrder())).isEqualTo(4);
+        assertThat(r.max(Comparator.reverseOrder())).isEqualTo(2);
     }
 }
