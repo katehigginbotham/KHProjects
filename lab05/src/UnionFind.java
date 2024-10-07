@@ -33,11 +33,13 @@ public class UnionFind {
         if (v < 0 || v >= parent.length) {
             throw new IllegalArgumentException("Invalid index");
         }
-        int r = v;
-        while (parent(r) >= 0) {
-            r = parent(r);
+        if (parent(v) < 0) {
+            return v;
         }
-        return r;
+        else {
+            parent[v] = find(parent(v));
+            return parent[v];
+        }
     }
 
     /* Connects two items V1 and V2 together by connecting their respective
