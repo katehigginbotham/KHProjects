@@ -35,62 +35,58 @@ public class Percolation {
                 wquf.union(virtualtop, i);
                 fullwquf.union(virtualtop, i);
             }
-            connections(row, col);
             if (row == size - 1) {
                 wquf.union(virtualbottom, i);
             }
+            connections(row, col);
         }
     }
 
-    // is the site (row, col) open?
     public boolean isOpen(int row, int col) {
         validindex(row, col);
         int i = xyto1D(row, col);
         return opensites[i];
     }
 
-    // is the site (row, col) full?
     public boolean isFull(int row, int col) {
         validindex(row, col);
         int i = xyto1D(row, col);
         return fullwquf.connected(virtualtop, i);
     }
 
-    // number of open sites
     public int numberOfOpenSites() {
         return opensitesnum;
     }
 
-    // does the system percolate?
     public boolean percolates() {
         return wquf.connected(virtualtop, virtualbottom);
     }
 
     public int xyto1D(int r, int c) {
-        return ((r + 1) * size) + (c + 1);
+        return (r * size) + c;
     }
 
     public void validindex(int r, int c) {
-        if (r < 0 || c < 0 || r > size || c > size) {
-            throw new IndexOutOfBoundsException("Index out of bounds: row=" + r);
+        if (r < 0 || c < 0 || r >= size || c >= size) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
         }
     }
 
     public void connections(int r, int c) {
         int i = xyto1D(r, c);
-        if (isOpen(r, c - 1) && c > 0) {
+        if (c > 0 && isOpen(r, c - 1)) {
             wquf.union(xyto1D(r, c - 1), i);
             fullwquf.union(xyto1D(r, c - 1), i);
         }
-        if (isOpen(r, c + 1) && c <= size - 1) {
+        if (c < size - 1 && isOpen(r, c + 1)) {
             wquf.union(xyto1D(r, c + 1), i);
             fullwquf.union(xyto1D(r, c + 1), i);
         }
-        if (isOpen(r - 1, c) && r > 0) {
+        if (r > 0 && isOpen(r - 1, c)) {
             wquf.union(xyto1D(r - 1, c), i);
             fullwquf.union(xyto1D(r - 1, c), i);
         }
-        if (isOpen(r + 1, c) && r <= size - 1) {
+        if (r < size - 1 && isOpen(r + 1, c)) {
             wquf.union(xyto1D(r + 1, c), i);
             fullwquf.union(xyto1D(r + 1, c), i);
         }
