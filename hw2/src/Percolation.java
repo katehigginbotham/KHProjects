@@ -14,14 +14,13 @@ public class Percolation {
     public Percolation(int N) {
         if (N <= 0) {
             throw new java.lang.IllegalArgumentException();
-        } else {
-            size = N;
-            opensites = new boolean[size * size];
-            virtualtop = size * size;
-            virtualbottom = size * size + 1;
-            wquf = new WeightedQuickUnionUF(size * size + 2);
-            fullwquf = new WeightedQuickUnionUF(size * size + 1);
         }
+        size = N;
+        opensites = new boolean[size * size];
+        virtualtop = size * size;
+        virtualbottom = size * size + 1;
+        wquf = new WeightedQuickUnionUF(size * size + 2);
+        fullwquf = new WeightedQuickUnionUF(size * size + 1);
     }
 
     // open the site (row, col) if it is not open already
@@ -33,12 +32,13 @@ public class Percolation {
             opensitesnum += 1;
             // if it is at virtual top say its full
             if (row == 0) {
-                wquf.union(i, virtualtop);
-            }
-            if (row == size - 1) {
-                wquf.union(i, virtualbottom);
+                wquf.union(virtualtop, i);
+                fullwquf.union(virtualtop, i);
             }
             connections(row, col);
+            if (row == size - 1) {
+                wquf.union(virtualbottom, i);
+            }
         }
     }
 
@@ -53,7 +53,7 @@ public class Percolation {
     public boolean isFull(int row, int col) {
         validindex(row, col);
         int i = xyto1D(row, col);
-        return fullwquf.connected(i, virtualtop);
+        return fullwquf.connected(virtualtop, i);
     }
 
     // number of open sites
@@ -67,32 +67,32 @@ public class Percolation {
     }
 
     public int xyto1D(int r, int c) {
-        return r * size + c;
+        return ((r + 1) * size) + (c + 1);
     }
 
     public void validindex(int r, int c) {
-        if (r < 0 || c < 0 || r > size - 1 || c > size - 1 || size < 0) {
-            throw new IndexOutOfBoundsException("Index out of bounds");
+        if (r < 0 || c < 0 || r > size || c > size) {
+            throw new IndexOutOfBoundsException("Index out of bounds: row=" + r);
         }
     }
 
     public void connections(int r, int c) {
         int i = xyto1D(r, c);
         if (isOpen(r, c - 1) && c > 0) {
-            wquf.union(i, xyto1D(r, c - 1));
-            fullwquf.union(i, xyto1D(r, c - 1));
+            wquf.union(xyto1D(r, c - 1), i);
+            fullwquf.union(xyto1D(r, c - 1), i);
         }
         if (isOpen(r, c + 1) && c <= size - 1) {
-            wquf.union(i, xyto1D(r, c + 1));
-            fullwquf.union(i, xyto1D(r, c + 1));
+            wquf.union(xyto1D(r, c + 1), i);
+            fullwquf.union(xyto1D(r, c + 1), i);
         }
         if (isOpen(r - 1, c) && r > 0) {
-            wquf.union(i, xyto1D(r - 1, c));
-            fullwquf.union(i, xyto1D(r - 1, c));
+            wquf.union(xyto1D(r - 1, c), i);
+            fullwquf.union(xyto1D(r - 1, c), i);
         }
         if (isOpen(r + 1, c) && r <= size - 1) {
-            wquf.union(i, xyto1D(r + 1, c));
-            fullwquf.union(i, xyto1D(r + 1, c));
+            wquf.union(xyto1D(r + 1, c), i);
+            fullwquf.union(xyto1D(r + 1, c), i);
         }
     }
 
