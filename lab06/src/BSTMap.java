@@ -23,7 +23,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     public Node putNode(Node node, K key, V value) {
         if (node == null) {
-            size++;
+            size += 1;
             return new Node(key, value);
         }
         int check = key.compareTo(node.key);
