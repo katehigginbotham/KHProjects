@@ -44,8 +44,7 @@ public class NGramMap {
             Double curr = timeseries.get(year);
             if (curr == null) {
                 timeseries.put(year, (double) count);
-            }
-            else {
+            } else {
                 timeseries.put(year, curr + count);
             }
         }

@@ -65,10 +65,10 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries plus(TimeSeries ts) {
         TimeSeries tsreturn = new TimeSeries();
-        for (Integer year : this.years()) {
+        for (int year : this.years()) {
             tsreturn.put(year, this.get(year));
         }
-        for (Integer year : ts.years()) {
+        for (int year : ts.years()) {
             Double thisyear = tsreturn.get(year);
             Double tsyear = ts.get(year);
             if (thisyear == null) {
@@ -91,7 +91,7 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries dividedBy(TimeSeries ts) {
         TimeSeries tsreturn = new TimeSeries();
-        for (Integer year : this.years()) {
+        for (int year : this.years()) {
             Double thisyear = this.get(year);
             Double tsyear = ts.get(year);
             if (thisyear == null) {
