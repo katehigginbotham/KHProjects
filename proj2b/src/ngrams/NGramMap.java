@@ -41,5 +41,9 @@ public class NGramMap extends StaffNGramMap {
         return countHistory(word, MIN_YEAR, MAX_YEAR);
     }
 
+    public TimeSeries weightHistory(String word, int i, int i1) {
+        return null;
+    }
+
     // TODO: Replace this file with your own implementation if you want all the methods of an NGramMap
 }
