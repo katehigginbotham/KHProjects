@@ -1,8 +1,0 @@
-Project 0 implementation can be found in src/game2048/logic/Model.java 
-Instructions from project 0 from CS61B at UC Berkeley:
-https://fa24.datastructur.es/projects/proj0/ 
-
-Summary:
-1. You’ll get some practice with Java by creating a playable game of 2048. 
-2. We’ve already implemented the graphics and user interaction code for you. 
-3. Your job is to implement the logic of the game.

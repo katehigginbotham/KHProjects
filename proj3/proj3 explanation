@@ -1,8 +1,0 @@
-Project 3: Build Your Own World
-Instructions: https://fa24.datastructur.es/projects/proj3/
-
-Summary: Create an engine for generating explorable worlds
-1. You’ll implement code to generate random worlds.
-2. You’ll add a main menu for the user to start the game from.
-3. You’ll add support for saving a game and loading it back.
-4. You’ll get a chance to add any extra fun features to your project.
